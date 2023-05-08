@@ -2,9 +2,10 @@
 {
     public class Aluno
     {
-        public int AlunoId { get; set; }
-        public string AlunoName { get; set; }
-        public int TurmaId { get; set; }
-        public Turma Turma { get; set; }
+        public int AlunoId { get; set; } //Gerenciado pelo banco
+        public string AlunoName { get; set; } = null!; //Obrigatório
+        public int TurmaId { get; set; } //Obrigatório
+        public Turma? Turma { get; set; }
+        public ICollection<AlunoDisciplina>? AlunoDisciplina {get;set;}
     }
 }

@@ -3,7 +3,7 @@
     public class Turma
     {
         public int TurmaId { get; set; }
-        public int AnoTurma { get; set; }
-        public ICollection<Aluno> Alunos { get; set; }
+        public string NomeTurma { get; set; } = null!;
+        public ICollection<Aluno>? Alunos { get; set; }
     }
 }
