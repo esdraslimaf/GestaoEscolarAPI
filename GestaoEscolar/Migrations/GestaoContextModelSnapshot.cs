@@ -40,7 +40,7 @@ namespace GestaoEscolar.API.Migrations
 
                     b.HasIndex("TurmaId");
 
-                    b.ToTable("Alunos");
+                    b.ToTable("Alunos", (string)null);
                 });
 
             modelBuilder.Entity("GestaoEscolar.API.Models.AlunoDisciplina", b =>
@@ -55,7 +55,7 @@ namespace GestaoEscolar.API.Migrations
 
                     b.HasIndex("DisciplinaId");
 
-                    b.ToTable("AlunoDisciplina");
+                    b.ToTable("AlunoDisciplina", (string)null);
                 });
 
             modelBuilder.Entity("GestaoEscolar.API.Models.Disciplina", b =>
@@ -72,7 +72,7 @@ namespace GestaoEscolar.API.Migrations
 
                     b.HasKey("DisciplinaId");
 
-                    b.ToTable("Disciplinas");
+                    b.ToTable("Disciplinas", (string)null);
                 });
 
             modelBuilder.Entity("GestaoEscolar.API.Models.Turma", b =>
@@ -89,7 +89,7 @@ namespace GestaoEscolar.API.Migrations
 
                     b.HasKey("TurmaId");
 
-                    b.ToTable("Turmas");
+                    b.ToTable("Turmas", (string)null);
                 });
 
             modelBuilder.Entity("GestaoEscolar.API.Models.Aluno", b =>

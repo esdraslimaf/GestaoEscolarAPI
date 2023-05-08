@@ -7,5 +7,7 @@ namespace GestaoEscolar.API.Repository
         void AddTurma(Turma turma);
         void UpdateTurma(Turma turma);
         void RemoveTurma(int id);
+        List<Turma> GetTurmas();
+
     }
 }

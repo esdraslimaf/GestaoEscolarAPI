@@ -16,9 +16,14 @@ namespace GestaoEscolar.API.Controllers
             Repository = repository;
         }
 
+        [HttpGet]
+        public IActionResult GetTurmas()
+        {
+            return Ok(Repository.GetTurmas());
+        }
 
         [HttpPost]
-        public IActionResult Add(Turma turma)
+        public IActionResult Add([FromBody]Turma turma)
         {
             Repository.AddTurma(turma);
             return Ok(turma);

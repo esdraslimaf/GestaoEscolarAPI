@@ -1,3 +1,4 @@
+using GestaoEscolar.API.Database;
 using GestaoEscolar.API.Repository;
 using System.Text.Json.Serialization;
 
@@ -9,7 +10,9 @@ builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializ
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<GestaoContext>();
 builder.Services.AddScoped<ITurmaRepository, TurmaRepository>();
+builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 
 
 var app = builder.Build();
