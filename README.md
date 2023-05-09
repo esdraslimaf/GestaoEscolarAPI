@@ -1,5 +1,5 @@
 ## GestaoEscolarAPI
-"Este projeto é uma API CRUD (Create, Read, Update, Delete) autoral para gerenciamento de alunos em uma escola fictícia. 
+Este projeto é uma API CRUD (Create, Read, Update, Delete) autoral para gerenciamento de alunos em uma escola fictícia. 
 Através desta API, os usuários podem criar, visualizar, atualizar e excluir informações de alunos, incluindo seus nomes, 
 turmas, disciplinas, notas e outras informações relevantes. 
 
