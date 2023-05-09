@@ -4,7 +4,7 @@
 
 namespace GestaoEscolar.API.Migrations
 {
-    public partial class Inicio : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,7 @@ namespace GestaoEscolar.API.Migrations
                     AlunoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AlunoName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TurmaId = table.Column<int>(type: "int", nullable: false)
+                    TurmaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,37 +51,8 @@ namespace GestaoEscolar.API.Migrations
                         column: x => x.TurmaId,
                         principalTable: "Turmas",
                         principalColumn: "TurmaId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "AlunoDisciplina",
-                columns: table => new
-                {
-                    AlunoId = table.Column<int>(type: "int", nullable: false),
-                    DisciplinaId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AlunoDisciplina", x => new { x.AlunoId, x.DisciplinaId });
-                    table.ForeignKey(
-                        name: "FK_AlunoDisciplina_Alunos_AlunoId",
-                        column: x => x.AlunoId,
-                        principalTable: "Alunos",
-                        principalColumn: "AlunoId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AlunoDisciplina_Disciplinas_DisciplinaId",
-                        column: x => x.DisciplinaId,
-                        principalTable: "Disciplinas",
-                        principalColumn: "DisciplinaId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AlunoDisciplina_DisciplinaId",
-                table: "AlunoDisciplina",
-                column: "DisciplinaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Alunos_TurmaId",
@@ -91,9 +62,6 @@ namespace GestaoEscolar.API.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AlunoDisciplina");
-
             migrationBuilder.DropTable(
                 name: "Alunos");
 

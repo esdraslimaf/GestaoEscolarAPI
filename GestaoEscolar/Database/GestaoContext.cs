@@ -1,9 +1,10 @@
 ﻿using GestaoEscolar.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GestaoEscolar.API.Database
 {
-    public class GestaoContext:DbContext
+    public class GestaoContext : DbContext
     {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -15,12 +16,10 @@ namespace GestaoEscolar.API.Database
         public DbSet<Disciplina> Disciplinas { get; set; }
         public DbSet<Turma> Turmas { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AlunoDisciplina>().HasKey(ad => new { ad.AlunoId, ad.DisciplinaId });
-            modelBuilder.Entity<AlunoDisciplina>().HasOne(a => a.Aluno).WithMany(a => a.AlunoDisciplina).HasForeignKey(fk=>fk.AlunoId);
-            modelBuilder.Entity<AlunoDisciplina>().HasOne(ad => ad.Disciplina).WithMany(d => d.AlunoDisciplina).HasForeignKey(ad => ad.DisciplinaId);
+           
         }
+
     }
 }

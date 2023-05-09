@@ -40,22 +40,7 @@ namespace GestaoEscolar.API.Migrations
 
                     b.HasIndex("TurmaId");
 
-                    b.ToTable("Alunos", (string)null);
-                });
-
-            modelBuilder.Entity("GestaoEscolar.API.Models.AlunoDisciplina", b =>
-                {
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DisciplinaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlunoId", "DisciplinaId");
-
-                    b.HasIndex("DisciplinaId");
-
-                    b.ToTable("AlunoDisciplina", (string)null);
+                    b.ToTable("Alunos");
                 });
 
             modelBuilder.Entity("GestaoEscolar.API.Models.Disciplina", b =>
@@ -72,7 +57,7 @@ namespace GestaoEscolar.API.Migrations
 
                     b.HasKey("DisciplinaId");
 
-                    b.ToTable("Disciplinas", (string)null);
+                    b.ToTable("Disciplinas");
                 });
 
             modelBuilder.Entity("GestaoEscolar.API.Models.Turma", b =>
@@ -89,7 +74,7 @@ namespace GestaoEscolar.API.Migrations
 
                     b.HasKey("TurmaId");
 
-                    b.ToTable("Turmas", (string)null);
+                    b.ToTable("Turmas");
                 });
 
             modelBuilder.Entity("GestaoEscolar.API.Models.Aluno", b =>
@@ -101,35 +86,6 @@ namespace GestaoEscolar.API.Migrations
                         .IsRequired();
 
                     b.Navigation("Turma");
-                });
-
-            modelBuilder.Entity("GestaoEscolar.API.Models.AlunoDisciplina", b =>
-                {
-                    b.HasOne("GestaoEscolar.API.Models.Aluno", "Aluno")
-                        .WithMany("AlunoDisciplina")
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GestaoEscolar.API.Models.Disciplina", "Disciplina")
-                        .WithMany("AlunoDisciplina")
-                        .HasForeignKey("DisciplinaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aluno");
-
-                    b.Navigation("Disciplina");
-                });
-
-            modelBuilder.Entity("GestaoEscolar.API.Models.Aluno", b =>
-                {
-                    b.Navigation("AlunoDisciplina");
-                });
-
-            modelBuilder.Entity("GestaoEscolar.API.Models.Disciplina", b =>
-                {
-                    b.Navigation("AlunoDisciplina");
                 });
 
             modelBuilder.Entity("GestaoEscolar.API.Models.Turma", b =>
