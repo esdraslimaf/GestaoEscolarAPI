@@ -14,6 +14,7 @@ builder.Services.AddDbContext<GestaoContext>();
 builder.Services.AddScoped<ITurmaRepository, TurmaRepository>();
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
+builder.Services.AddScoped<IAvaliacoesRepository, AvaliacoesRepository>();
 
 
 var app = builder.Build();

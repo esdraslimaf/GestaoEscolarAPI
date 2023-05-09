@@ -4,6 +4,7 @@ using GestaoEscolar.API.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoEscolar.API.Migrations
 {
     [DbContext(typeof(GestaoContext))]
-    partial class GestaoContextModelSnapshot : ModelSnapshot
+    [Migration("20230509212929_Avaliacao_Aluno_Turma_Disciplina")]
+    partial class Avaliacao_Aluno_Turma_Disciplina
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,7 +77,7 @@ namespace GestaoEscolar.API.Migrations
 
                     b.HasIndex("TurmaId");
 
-                    b.ToTable("Avaliacoes");
+                    b.ToTable("Avaliacao");
                 });
 
             modelBuilder.Entity("GestaoEscolar.API.Models.Disciplina", b =>

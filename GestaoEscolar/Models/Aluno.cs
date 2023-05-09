@@ -6,5 +6,7 @@
         public string AlunoName { get; set; } = null!; //Obrigatório
         public int? TurmaId { get; set; } //Obrigatório
         public Turma? Turma { get; set; }
+        public ICollection<Avaliacao>? Avaliacoes { get; set; }
+
     }
 }
