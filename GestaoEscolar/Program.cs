@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen(c => { c.EnableAnnotations(); });
 builder.Services.AddDbContext<GestaoContext>();
 builder.Services.AddScoped<ITurmaRepository, TurmaRepository>();
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
+builder.Services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
 
 
 var app = builder.Build();
