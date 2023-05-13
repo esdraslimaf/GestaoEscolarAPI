@@ -30,7 +30,7 @@ namespace GestaoEscolar.API.Controllers
 
         [HttpGet("{id}")]
         [SwaggerOperation(
-           Summary = "Buscar ID+NOME+Avaliações de uma determinada disciplina",
+           Summary = "Buscar ID+NOME+Avaliações cadastradas de uma determinada disciplina",
            Description = "Busca Completa",
            OperationId = "BuscarDisciplinasPorId"
            )]
