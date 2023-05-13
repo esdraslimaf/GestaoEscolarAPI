@@ -1,5 +1,6 @@
 ﻿using GestaoEscolar.API.Database;
 using GestaoEscolar.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestaoEscolar.API.Repository
 {
@@ -19,7 +20,7 @@ namespace GestaoEscolar.API.Repository
 
         public Disciplina GetDisciplina(int id)
         {
-            return _db.Disciplinas.Find(id);
+            return _db.Disciplinas.Include(d => d.Avaliacoes).FirstOrDefault(objdb => objdb.DisciplinaId == id)!;
         }
 
         public List<Disciplina> GetDisciplinas()

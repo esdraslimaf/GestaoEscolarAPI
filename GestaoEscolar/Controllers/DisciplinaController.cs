@@ -10,69 +10,73 @@ namespace GestaoEscolar.API.Controllers
     [ApiController]
     public class DisciplinaController : ControllerBase
     {
-        private readonly IDisciplinaRepository Repository;
+        private readonly IDisciplinaRepository _repository;
+
         public DisciplinaController(IDisciplinaRepository repository)
         {
-            Repository = repository;
-        }
-
-        [HttpDelete]
-        [SwaggerOperation(
-        Summary = "Remover disciplina pelo ID",
-        Description = "Remove disciplina",
-        OperationId = "RemoveDisciplina"
-        )]
-        public IActionResult RemoveDisciplina(int id)
-        {
-            Repository.RemoveDisciplina(id);
-            return Ok("Disciplina de id "+id+" removida!");
-        }
-
-        [HttpPost]
-        [SwaggerOperation(
-       Summary = "Adicionar disciplina",
-       Description = "Adiciona disciplina",
-       OperationId = "AdicionarDisciplina"
-       )]
-        public IActionResult AddDisciplina(Disciplina disciplina)
-        {
-            Repository.AddDisciplina(disciplina);
-            return Ok(disciplina);
+            _repository = repository;
         }
 
         [HttpGet]
         [SwaggerOperation(
             Summary = "Buscar ID e NOME das disciplinas",
-            Description = "Busca dados das disciplinas",
+            Description = "Caso queira buscar também as avaliações dessa disciplina, faça uma busca completa por ID",
             OperationId = "BuscarDisciplinas"
-            )]
+        )]
         public IActionResult GetDisciplinas()
         {
-            return Ok(Repository.GetDisciplinas());
+            return Ok(_repository.GetDisciplinas());
         }
 
-      /*  [HttpGet("{id}")]
+        [HttpGet("{id}")]
         [SwaggerOperation(
-            Summary = "Buscar ID e NOME das disciplinas",
-            Description = "Busca dados das disciplinas",
-            OperationId = "BuscarDisciplinasPorId"
-            )]
+           Summary = "Buscar ID+NOME+Avaliações de uma determinada disciplina",
+           Description = "Busca Completa",
+           OperationId = "BuscarDisciplinasPorId"
+           )]
         public IActionResult GetDisciplina(int id)
         {
-            return Ok(Repository.GetDisciplina(id));
+            return Ok(_repository.GetDisciplina(id));
         }
-      */
+
+        [HttpPost]
+        [SwaggerOperation(
+            Summary = "Adicionar disciplina",
+            Description = "Inserir apenas o nome da disciplina. Exemplo: {\n\t\"nomeDisciplina\": \"Filosofia\"\n}",
+            OperationId = "AdicionarDisciplina"
+        )]
+        public IActionResult AddDisciplina([FromBody] Disciplina disciplina)
+        {
+            _repository.AddDisciplina(disciplina);
+            return Ok($"Disciplina: \"{disciplina}\" adicionada com sucesso!");
+        }
+
         [HttpPut]
         [SwaggerOperation(
             Summary = "Atualizar nome da disciplina pelo ID",
-            Description = "Edita nomes das disciplinas",
+            Description = "Insira o ID da disciplina e coloque o novo nome desejado. Exemplo: {\n\t\"disciplinaId\": 5,\n\t\"nomeDisciplina\": \"INSERIR NOVO NOME AQUI\"\n}",
             OperationId = "EditarDisciplina"
-            )]
-        public IActionResult UpdateDisciplina(Disciplina disciplina)
+        )]
+        public IActionResult UpdateDisciplina([FromBody] Disciplina disciplina)
         {
-            Repository.UpdateDisciplina(disciplina);
-            return Ok($"Nome da disciplina de id {disciplina.DisciplinaId} foi alterada para {disciplina.NomeDisciplina}");
+            var disciplinaDb = _repository.GetDisciplina(disciplina.DisciplinaId);
+            string nome = disciplinaDb.NomeDisciplina;
+            _repository.UpdateDisciplina(disciplina);
+            return Ok($"Nome da disciplina \"{nome}(Id:{disciplina.DisciplinaId})\" foi alterado para \"{disciplina.NomeDisciplina}({disciplina.DisciplinaId})\"");
         }
 
+        [HttpDelete("{id}")]
+        [SwaggerOperation(
+            Summary = "Remover disciplina pelo ID",
+            Description = "Informe o ID para remover determina disciplina!",
+            OperationId = "RemoveDisciplina"
+        )]
+        public IActionResult RemoveDisciplina(int id)
+        {
+            var disciplina = _repository.GetDisciplina(id);
+            string NomeDisciplina = disciplina.NomeDisciplina;
+            _repository.RemoveDisciplina(id);
+            return Ok($"A disciplina \"{NomeDisciplina} (Id:{id})\" foi removida com sucesso!");
+        }
     }
 }
