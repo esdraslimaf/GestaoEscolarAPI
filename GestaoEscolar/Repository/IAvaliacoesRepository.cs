@@ -13,7 +13,7 @@ namespace GestaoEscolar.API.Repository
         List<Avaliacao> GetAvaliacaoIdTurma(int IdTurma);
         List<Avaliacao> GetAvaliacaoIdAluno(int idAluno);
         void RemoveAvaliacao(int id);
-
+        void UpdateAvaliacao(Avaliacao avaliacao);
 
     }
 }

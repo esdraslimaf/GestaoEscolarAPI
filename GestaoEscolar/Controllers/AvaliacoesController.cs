@@ -29,6 +29,13 @@ namespace GestaoEscolar.API.Controllers
             return Ok(avaliacao);
         }
 
+        [HttpPut]
+        public IActionResult UpdateAvaliacao([FromBody] Avaliacao avaliacao)
+        {
+            Repository.UpdateAvaliacao(avaliacao);
+            return Ok(avaliacao);
+        }
+
         [HttpDelete("{id}")]
         [SwaggerOperation(
             Summary = "Remover uma avaliação por ID",

@@ -51,6 +51,11 @@ namespace GestaoEscolar.API.Repository
         {
            return _db.Avaliacoes.Find(id)!;
         }
-      
+
+        public void UpdateAvaliacao(Avaliacao avaliacao)
+        {
+            _db.Avaliacoes.Update(avaliacao);
+            _db.SaveChanges();
+        }
     }
 }
