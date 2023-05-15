@@ -53,9 +53,32 @@ namespace GestaoEscolar.API.Repository
         }
 
         public void UpdateAvaliacao(Avaliacao avaliacao)
-        {
+        {    
+            var AlunoDB = _db.Alunos.Find(avaliacao.AlunoId);
+            if (AlunoDB == null)
+            {
+                throw new Exception("O ID desse aluno é inexistente no banco de dados!");
+            }
+            else if (_db.Avaliacoes.Find(avaliacao.AvaliacaoId) == null)
+            {
+                throw new Exception("Id de avaliação inexistente.");
+            }
+            else if (_db.Disciplinas.Find(avaliacao.DisciplinaId)==null)
+            {
+                throw new Exception("Id de disciplina inexistente.");
+            }
+            else if (avaliacao.TurmaId != AlunoDB.TurmaId!)
+            {
+               throw new Exception("Os dados inseridos em relação ao aluno estão incorretos!");
+            }
+            else if (avaliacao.Nota > 10 || avaliacao.Nota < 0)
+            {
+                throw new Exception("Valor de nota inválido. Insira um número entre 0 e 10");
+            }           
+            else { 
             _db.Avaliacoes.Update(avaliacao);
             _db.SaveChanges();
+            }
         }
     }
 }

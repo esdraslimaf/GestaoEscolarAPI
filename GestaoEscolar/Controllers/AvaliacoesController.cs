@@ -30,10 +30,21 @@ namespace GestaoEscolar.API.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation(
+            Summary = "Editar avaliação (Inserir ID da Avaliação, Id da Aluno, Id da Turma, Id da Disciplina, nota e descrição da avaliação)",
+            Description = "Exemplo: {\n\t\"avaliacaoId\": 4,\n\t\"alunoId\": 6,\n\t\"turmaId\": 2,\n\t\"disciplinaId\": 2,\n\t\"nota\": 5,\n\t\"descricao\": \"Avaliação 1 de Português!\"\n}",
+            OperationId = "EditarAvaliacao"
+        )]
         public IActionResult UpdateAvaliacao([FromBody] Avaliacao avaliacao)
         {
+            try { 
             Repository.UpdateAvaliacao(avaliacao);
             return Ok(avaliacao);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("Não foi possível atualizar a avaliação: " + ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]

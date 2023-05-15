@@ -33,7 +33,7 @@ namespace GestaoEscolar.API.Repository
         }
         public List<Aluno> GetAlunos()
         {
-            return _db.Alunos.ToList();
+            return _db.Alunos.OrderBy(a => a.TurmaId).ThenBy(a => a.AlunoId).ToList();
         }
 
         public Aluno GetAluno(int id)
