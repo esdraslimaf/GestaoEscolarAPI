@@ -40,5 +40,18 @@ namespace GestaoEscolar.API.Repository
         {
             return _db.Alunos.Include(a => a.Turma).ThenInclude(t=>t.Alunos).FirstOrDefault(a => a.AlunoId == id)!;
         }
+
+        public List<Aluno> GetAlunosLIKE(string nome)
+        {
+            string nomeParametro = nome;
+            var alunos = _db.Alunos.Where(a => EF.Functions.Like(a.AlunoName, "%" + nomeParametro + "%")).OrderBy(a=>a.TurmaId).ThenBy(a=>a.AlunoId).ToList();
+            if (alunos.Count == 0)
+            {
+                throw new Exception("Aluno não encontrado!");
+            }
+            else { 
+            return alunos;
+            }
+        }
     }
 }

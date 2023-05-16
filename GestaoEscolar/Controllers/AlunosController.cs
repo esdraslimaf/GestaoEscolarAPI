@@ -35,7 +35,25 @@ namespace GestaoEscolar.API.Controllers
         )]
         public IActionResult GetAluno(int id)
         {
-            return Ok(_db.GetAluno(id));
+            return Ok(_db.GetAluno(id));                   
+        }
+
+        [HttpGet("nome/{nome}")]
+        [SwaggerOperation(
+            Summary = "Buscar aluno pelo nome",
+            Description = "Não precisa inserir o nome completo, apenas caracteres que existem no nome do aluno",
+            OperationId = "BuscaAlunoPeloNome"
+        )]
+        
+        public IActionResult GetAlunosLIKE(string nome)
+        {
+            try { 
+            return Ok(_db.GetAlunosLIKE(nome));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]

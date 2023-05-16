@@ -9,6 +9,7 @@ namespace GestaoEscolar.API.Repository
         void UpdateAluno(Aluno aluno);
         List<Aluno> GetAlunos();
         Aluno GetAluno(int id);
+        List<Aluno> GetAlunosLIKE(string nome);
 
     }
 }
